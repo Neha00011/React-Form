@@ -1,10 +1,11 @@
 import React from "react";
-import Input from "./Input";
+import Input from "../Input";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import countries from "../constant/Country";
-import PasswordInput from "./PasswordInput";
-import useData from "../context/data";
+import countries from "../../constant/Country";
+import PasswordInput from "../PasswordInput";
+import useData from "../../context/data";
+import './Form.css'
 
 function Form() {
   const navigate = useNavigate();
@@ -167,98 +168,91 @@ function Form() {
 
   return (
     <>
-      <div className="max-w-2xl mx-auto p-8 bg-purple-300 border border-brown-500 shadow-md rounded-lg">
-        <form>
-          <Input
+      <div className="container">
+    <form>
+        <Input
             label="First Name "
             type="text"
             placeholder="firstname"
             onChange={handleFirstNameChange}
-          />
+        />
 
-          <Input
+        <Input
             label="Last Name "
             type="text"
             placeholder="lastname"
             onChange={handleLastNameChange}
-          />
-          <Input
+        />
+        <Input
             label="Username "
             type="text"
             placeholder="username"
             onChange={handleUsernameChange}
-          />
-          <Input
+        />
+        <Input
             label="Email "
             type="email"
             placeholder="email"
             onChange={handleEmailChange}
-          />
-          <PasswordInput onChange={handlePasswordChange} />
+        />
+        <PasswordInput onChange={handlePasswordChange} />
 
-          <Input
+        <Input
             label="Mobile Number "
             type="number"
             placeholder="mobile"
             onChange={handleMobileChange}
-          />
-          <div className="flex items-center mb-4">
-            <label className="w-1/4 text-sm font-medium text-gray-700">
-              Country
-            </label>
+        />
+        <div className="form-group">
+            <label>Country</label>
             <select
-              className="p-2 border border-blue-300 rounded-md w-3/4 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              name="country"
-              value={country.id}
-              onChange={handleSelectCountry}
+                name="country"
+                value={country.id}
+                onChange={handleSelectCountry}
             >
-              {countries.map((option) => (
-                <option key={option.id} value={option.id}>
-                  {option.name}
-                </option>
-              ))}
+                {countries.map((option) => (
+                    <option key={option.id} value={option.id}>
+                        {option.name}
+                    </option>
+                ))}
             </select>
-          </div>
-          <div className="flex items-center mb-4">
-            <label className="w-1/4 text-sm font-medium text-gray-700">
-              City
-            </label>
+        </div>
+        <div className="form-group">
+            <label>City</label>
             <select
-              className="p-2 border border-blue-300 rounded-md w-3/4 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              name="city"
-              onChange={handleCity}
+                name="city"
+                onChange={handleCity}
             >
-              {country.cities.map((city) => (
-                <option key={city.id} value={city.id}>
-                  {city.name}
-                </option>
-              ))}
+                {country.cities.map((city) => (
+                    <option key={city.id} value={city.id}>
+                        {city.name}
+                    </option>
+                ))}
             </select>
-          </div>
-          <Input
+        </div>
+        <Input
             label="Pan Number "
             type="text"
             placeholder="pan card"
             onChange={handlePanChange}
-          />
-          <Input
+        />
+        <Input
             label="Aadhar Number "
             type="text"
             placeholder="aadhar"
             onChange={handleAadharChange}
-          />
-          {error && <p className="text-red-400">{error}</p>}
-          <button
+        />
+        {error && <p className="error">{error}</p>}
+        <button
             disabled={isDisabled}
-            className={`${
-              isDisabled ? " bg-slate-600 hover:bg-black " : ""
-            }bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+            className={`submit-button ${isDisabled ? "disabled" : ""}`}
             onClick={handleSubmit}
-          >
+        >
             Submit
-          </button>
-        </form>
-      </div>
+        </button>
+    </form>
+</div>
+
     </>
   );
 }
